@@ -359,10 +359,12 @@ SquaremOutput fpiter(std::vector<double> par){
 
 //main() used for demostration
 
-std::vector<int> Other_input1 {162,267,271,185,111,61,27,8,3,1};
+int otherinput1[] = {162,267,271,185,111,61,27,8,3,1};
+std::vector<int> Other_input1(otherinput1, otherinput1 + sizeof(otherinput1) / sizeof(int));
 
 int main(){
-    std::vector<double> par_initial {0.5,3,1};//some random starting point,
+	double parinitial[] = {0.5,3,1};
+    std::vector<double> par_initial(parinitial, parinitial + sizeof(parinitial) / sizeof(double));//some random starting point,
     SquaremOutput SQ_result;
     
     std::cout<<"\n\n\nDemo1: using squarem1 and the objective function"<<endl;
