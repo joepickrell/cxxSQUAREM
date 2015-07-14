@@ -8,35 +8,15 @@
 #include <math.h>
 #include <vector>
 #include <numeric>
-
+#include "SquaremOutput.h"
+#include "SquaremControl.h"
 using namespace std;
 
 //Global Control Variable
-struct SquaremControl{
-    int K=1;
-    int method=3;//1,2,3 indicates the types of step length to be used in squarem1,squarem2, 4,5 for "rre" and "mpe" in cyclem1 and cyclem2,  standing for reduced-rank ("rre") or minimal-polynomial ("mpe") extrapolation.
-    // K=1 must go with method=1,2 or 3
-    // K>1 must go with method=4 or 5
-    double mstep=4;
-    int maxiter=1500;
-    bool square=true;
-    bool trace=true;//currently set to be true for debugging purpose
-    double stepmin0=1;
-    double stepmax0=1;
-    double kr=1;
-    double objfninc=1;//0 to enforce monotonicity, Inf for non-monotonic scheme, 1 for monotonicity far from solution and allows for non-monotonicity closer to solution
-    double tol=1e-7;
-} SquaremDefault;
+SquaremControl SquaremDefault;
 
 //Output Struct
-struct SquaremOutput{
-    std::vector<double> par;
-    double valueobjfn;
-    int iter=0;
-    int pfevals=0;
-    int objfevals=0;
-    bool convergence=false;
-} sqobj,sqobjnull;
+SquaremOutput sqobj,sqobjnull;
 
 vector<double> fixptfn(std::vector<double> par);
 double objfn(std::vector<double> par);
@@ -382,7 +362,6 @@ SquaremOutput fpiter(std::vector<double> par){
 std::vector<int> Other_input1 {162,267,271,185,111,61,27,8,3,1};
 
 int main(){
-    std::cout<<"Hi, this is a demostration using Poisson mixture!"<<std::endl;
     std::vector<double> par_initial {0.5,3,1};//some random starting point,
     SquaremOutput SQ_result;
     
